@@ -1,0 +1,21 @@
+<!--
+  Generated template for the ControlesPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+         <button menuToggle>
+      <ion-icon name='menu'></ion-icon>
+</button>
+    <ion-title>{{"menu.controles" | translate }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <button *ngFor="let control of controlesList" (click)="takeControl(control)" twitter style="width: 100%;">{{control.nombre}}</button>
+</ion-content>

@@ -1,0 +1,14 @@
+{
+    "home" : "Home",
+    "intro" : "Es la primera vez que usas la app, ve al menu y unete a una banda existente, o crea una nueva",
+     "menu": {    
+        "home": "Home",
+        "controles": "Controles",
+        "checklist": "Checklist",
+        "sync": "sincronización",
+        "login": "Login"
+    },
+    "asistencia": "Asistencia"
+
+
+}
