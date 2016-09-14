@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import { Config } from '../../config/config';
 /*
   Generated class for the Eventos provider.
 
@@ -10,11 +10,12 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class EventosService {
-
-  constructor(private http: Http) {}
+private baseurl:string;
+  constructor(private http: Http, private config: Config) {}
 
 getEventos(user) {
-        let eventos = this.http.get(`http://myband.ntskoala.com/app2/loadevents.php?uuid=${user}&_dc=1470480375978`);
+        this.baseurl = this.config.baseurl;
+        let eventos = this.http.get(`${this.baseurl}/loadevents.php?uuid=${user}&_dc=1470480375978`);
         return eventos;
     }
 

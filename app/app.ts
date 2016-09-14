@@ -3,6 +3,7 @@ import { ionicBootstrap, Platform,Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 import {Data} from './providers/data/data';
 import { Device } from 'ionic-native';
+import { Config } from './config/config';
 //import { Storage, LocalStorage } from 'ionic-angular';
 
 import {provide} from '@angular/core';
@@ -23,7 +24,8 @@ providers: [HTTP_PROVIDERS, TRANSLATE_PROVIDERS, provide(TranslateLoader, {
 useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
 deps: [Http]
 }),
-TranslateService],
+TranslateService,
+Config],
 pipes: [TranslatePipe]
 })
 export class MyApp {

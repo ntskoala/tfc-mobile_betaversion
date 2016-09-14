@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-
+import {Config} from '../../config/config';
 /*
   Generated class for the Bandas provider.
 
@@ -10,16 +10,18 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class BandasService {
+  private baseurl: string = this.config.baseurl;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private config: Config) {}
 
 getlistadoBandas() {
-        let bandas = this.http.get(`http://myband.ntskoala.com/app2/listadobandas.php`);
+
+        let bandas = this.http.get(`${this.baseurl}/listadobandas.php`);
         return bandas;
     }
 getMisBandas(user)
 {
-        let misbandas = this.http.get(`http://myband.ntskoala.com/app2/loadbands_.php?uuid=${user}&_dc=1470480375978`);
+        let misbandas = this.http.get(`${this.baseurl}/loadbands_.php?uuid=${user}&_dc=1470480375978`);
         return misbandas;
     }
 }
