@@ -6,6 +6,7 @@ export class Data {
  
   private storage;
   private data;
+  public logged: number;
  private logins: Array<{user: string, password: string}>;
   constructor(){
     this.storage = new Storage(SqlStorage, {name:'tfc'});
@@ -32,9 +33,9 @@ alert(response);
 });  
 }
 
-getLogin(nombre: string, password:string){
+public getLogin(nombre: string, password:string){
 this.storage.query('select * from logins WHERE user = ? AND password = ?',[nombre,password]).then((data) => {
-    alert (data.res.rows.length);
+    this.logged = data.res.rows.length;
     //alert (data.res.rows.item(0).user);
 }, (error) => {
               alert("ERROR -> " + JSON.stringify(error.err));

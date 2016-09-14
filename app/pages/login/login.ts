@@ -1,22 +1,37 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
-
+import { NavController, MenuController } from 'ionic-angular';
+import {ControlesPage} from '../controles/controles';
+import {Distancia} from '../../providers/distancia/distancia';
+import {Data} from '../../providers/data/data';
 import {TranslatePipe} from 'ng2-translate';
-/*
-  Generated class for the LoginPage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+
 @Component({
-  templateUrl: 'build/pages/login/login.html',
-  pipes: [TranslatePipe]
+  templateUrl: 'build/pages/home/home.html',
+  pipes: [TranslatePipe],
+  providers: [Distancia]
 })
 export class LoginPage {
-
-  constructor(private navCtrl: NavController) {
-
+  public nombre: string;
+  public password: string;
+  public miDistancia: any;
+  public logged;
+  public accesomenu: any;
+  constructor(public navCtrl: NavController, menu: MenuController,private distancia: Distancia, private data:Data) {
+    menu.enable(false);
+    this.accesomenu = menu;
+    //alert (localStorage["uuid"]);
+    this.miDistancia = distancia.getDistancia();
   }
 
+login(){
+this.data.getLogin(this.nombre,this.password);
+setTimeout (() => {
+  if (this.data.logged > 0){
+    this.accesomenu.enable(true);
+    }
+  },500);
+//alert (this.miDistancia);
+//this.navCtrl.push(ControlesPage);
+}
 }
