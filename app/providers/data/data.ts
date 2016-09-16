@@ -15,6 +15,7 @@ export class Data {
       { user: 'user1' , password: 'pass1' },
       { user: 'user2' , password: 'pass2' }
       ]; 
+      //this.inicializa();
   }
  inicializa(){
    this.storage.query('CREATE TABLE IF NOT EXISTS logins (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, password TEXT)').then((data) => {
