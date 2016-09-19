@@ -1,8 +1,9 @@
+import {Storage, SqlStorage} from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Network } from 'ionic-native';
-import {Data} from '../../providers/data/data';
-
+import {SyncService} from '../../providers/sync/sync';
+import {LoginPage} from '../login/login';
 import {TranslatePipe} from 'ng2-translate';
 /*
   Generated class for the SyncPage page.
@@ -11,15 +12,24 @@ import {TranslatePipe} from 'ng2-translate';
   Ionic pages and navigation.
 */
 @Component({
+   providers: [SyncService],
   templateUrl: 'build/pages/sync/sync.html',
   pipes: [TranslatePipe]
 })
 export class SyncPage {
+//private users: Array<{user: string, password: string, tipo: string, nombre: string}>;
+public users: any;
+private storage;
+  constructor(private navCtrl: NavController, private sync: SyncService) {
+    this.storage = new Storage(SqlStorage, {name:'tfc'});
 
-  constructor(private navCtrl: NavController,private data: Data) {
+      
 //    if (this.hayConexion()){
       this.sincronizate();
 //    }
+//      else {
+//        this.navCtrl.setRoot(LoginPage);
+//      }
   
     }
 
@@ -28,7 +38,44 @@ export class SyncPage {
   }
   sincronizate(){
    // alert ('a trabajar');
-  this.data.inicializa()
+            this.sync.getMisUsers().subscribe(
+            data => {
+               this.users = data.json();
+                    this.storage.query("delete from logins").then((data) => {
+                      console.log(JSON.stringify(data.res));
+                      }, (error) => {
+                      console.log("ERROR -> " + JSON.stringify(error.err));
+                      } );
+               this.users.forEach (user => this.save(user));
+               this.navCtrl.setRoot(LoginPage);
+            },
+            err => console.error(err),
+            () => console.log('getRepos completed')
+        );  
+ // this.users.forEach (user => this.save(user));
+//for (let usuario of this.users) {
+//  console.log(usuario.nombre);
+//}
+
+  //this.data.inicializa();
+
 
   }
+
+
+  save(user){
+   alert ('saving' + user.nombre + ' ' + user.usuario);
+    //let newData = JSON.stringify(data);
+    //this.storage.set('usuarios', newData);
+              this.storage.query("INSERT INTO logins (id, user, password, tipouser, nombre) VALUES (?,?,?,?,?)",[user.idusuario,user.usuario,user.password,user.tipouser,user.nombre]).then((data) => {
+                  console.log(JSON.stringify(data.res));
+                  alert("ok " + data.res);
+              }, (error) => {
+                  console.log("ERROR -> " + JSON.stringify(error.err));
+                  alert("error " + JSON.stringify(error.err));
+              });
+}
+
+
+
 }

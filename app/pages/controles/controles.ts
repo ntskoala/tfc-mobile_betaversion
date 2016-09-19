@@ -25,14 +25,10 @@ public user: number = 1;
   }
     getControles() {
             this.controlServicio.getMisControles(this.user).subscribe(
-            
+
             data => {
-                //this.datos = data.json();
-                //this.controlesList = this.datos.data;
-                alert (data.toString().indexOf("nombre"))
                this.controlesList = data.json();
-                //alert (this.controlesList);
-                //alert (this.controlesList[0].nombre);
+
             },
             err => console.error(err),
             () => console.log('getRepos completed')

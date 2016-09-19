@@ -14,13 +14,9 @@ import {LoginPage} from '../login/login';
 export class HomePage {
 slideOptions: any;
   constructor(public navCtrl: NavController, menu: MenuController,private distancia: Distancia, private data:Data) {
-    menu.enable(false);
-    this.slideOptions = {
-pager: true
-};
+   
   }
-goToLogin(){
-  this.navCtrl.setRoot(LoginPage);
-}
+
 
 }
+ 

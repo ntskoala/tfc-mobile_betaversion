@@ -5,11 +5,14 @@ import {Distancia} from '../../providers/distancia/distancia';
 import {Data} from '../../providers/data/data';
 import {TranslatePipe} from 'ng2-translate';
 import {HomePage} from '../home/home';
+import {IntroPage} from '../intro/intro';
+import {SyncService} from '../../providers/sync/sync';
+//import {Config} from '../../config/config';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
   pipes: [TranslatePipe],
-  providers: [Distancia]
+  providers: [Distancia,SyncService]
 })
 export class LoginPage {
   public nombre: string;
@@ -22,10 +25,10 @@ export class LoginPage {
     menu.enable(false);
 this.local = new Storage(LocalStorage);
 this.local.get('intro').then((result) => {
-if(!result){
-this.local.set('intro', true);
-this.navCtrl.setRoot(HomePage);
-}
+  if(!result){
+    this.local.set('intro', true);
+    this.navCtrl.setRoot(IntroPage);
+  }
 });
 
 
@@ -36,12 +39,18 @@ this.navCtrl.setRoot(HomePage);
   }
 
 login(){
-  this.navCtrl.setRoot(ControlesPage);
+
+ // this.navCtrl.setRoot(ControlesPage);
+
 this.data.getLogin(this.nombre,this.password);
 setTimeout (() => {
-  if (this.data.logged > 0){
+  alert (this.data.logged);
+  if (!isNaN(this.data.logged)){
     this.accesomenu.enable(true);
-    this.navCtrl.setRoot(ControlesPage);
+    this.navCtrl.setRoot(HomePage);
+    }
+    else{
+      alert ('Mal user');
     }
   },500);
 //alert (this.miDistancia);
