@@ -18,8 +18,18 @@ export class Data {
       this.inicializa();
   }
  inicializa(){
-   this.storage.query('CREATE TABLE IF NOT EXISTS logins (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
-            console.log("TABLE CREATED -> " + JSON.stringify(data.res));
+   this.storage.query('CREATE TABLE IF NOT EXISTS logins (id INTEGER PRIMARY KEY, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
+            console.log("TABLE CREATED  LOGINS-> " + JSON.stringify(data.res));
+        }, (error) => {
+            console.log("ERROR -> " + JSON.stringify(error.err));
+  });
+     this.storage.query('CREATE TABLE IF NOT EXISTS controles (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
+            console.log("TABLE CREATED CONTROLES-> " + JSON.stringify(data.res));
+        }, (error) => {
+            console.log("ERROR -> " + JSON.stringify(error.err));
+  });
+       this.storage.query('CREATE TABLE IF NOT EXISTS checklist (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
+            console.log("TABLE CREATED CHECKLIST-> " + JSON.stringify(data.res));
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });
@@ -41,8 +51,13 @@ alert(response);
 
 public getLogin(nombre: string, password:string){
 this.storage.query('select * from logins WHERE user = ? AND password = ?',[nombre,password]).then((data) => {
-    this.logged = data.res.rows.length;
-    //alert (data.res.rows.item(0).user);
+    if (data.res.rows.length >0){
+    this.logged = data.res.rows.item(0).id;
+    }
+    else{
+        this.logged = undefined;
+    }
+   // alert (data.res.rows.item(0).id);
 }, (error) => {
               alert("ERROR -> " + JSON.stringify(error.err));
           });

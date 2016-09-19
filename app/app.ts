@@ -30,7 +30,7 @@ pipes: [TranslatePipe]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = LoginPage;
+  rootPage: any = SyncPage;
    pages: Array<{title: string, component: any}>;
   translate: TranslateService;
   local :any;
