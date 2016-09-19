@@ -21,8 +21,8 @@ getMisControles(userid)
 getMisUsers()
 {
     //alert ('idempresa' + this.config.idempresa);
-        let miscontroles = this.http.get(`${this.config.baseurl}/views/getusers.php?idempresa=${this.config.idempresa}&_dc=1470480375978`);
-        return miscontroles;
+        let misusers = this.http.get(`${this.config.baseurl}/views/getusers.php?idempresa=${this.config.idempresa}&_dc=1470480375978`);
+        return misusers;
     }
 
 

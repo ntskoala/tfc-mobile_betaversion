@@ -34,6 +34,7 @@ export class MyApp {
    pages: Array<{title: string, component: any}>;
   translate: TranslateService;
   local :any;
+ // sync: SyncPage;
   constructor(public platform: Platform,translate: TranslateService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -46,7 +47,7 @@ export class MyApp {
       { title: 'menu.sync' , component: SyncPage },
       { title: 'menu.login' , component: LoginPage }
       ]; 
-      
+     // this.sync.sincronizate();
       
       this.getDeviceDetails();
       StatusBar.styleDefault();

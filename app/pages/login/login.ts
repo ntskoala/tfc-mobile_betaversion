@@ -5,12 +5,13 @@ import {Distancia} from '../../providers/distancia/distancia';
 import {Data} from '../../providers/data/data';
 import {TranslatePipe} from 'ng2-translate';
 import {HomePage} from '../home/home';
+import {SyncService} from '../../providers/sync/sync';
 //import {Config} from '../../config/config';
 
 @Component({
   templateUrl: 'build/pages/login/login.html',
   pipes: [TranslatePipe],
-  providers: [Distancia]
+  providers: [Distancia,SyncService]
 })
 export class LoginPage {
   public nombre: string;

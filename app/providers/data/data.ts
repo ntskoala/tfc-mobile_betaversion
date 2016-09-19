@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
  import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 //import {Config} from '../../config/config';
-
+//import {SyncPage} from '../../pages/sync/sync';
 
 @Injectable()
 export class Data {
@@ -11,23 +11,19 @@ export class Data {
   private storage;
   private data;
   public logged: number;
- private logins: Array<{user: string, password: string}>;
+//  private sync: SyncPage;
+// private logins: Array<{user: string, password: string}>;
   constructor(private http: Http){
     this.storage = new Storage(SqlStorage, {name:'tfc'});
-     this.logins = [
-      { user: 'demo' , password: 'demo' },
-      { user: 'user1' , password: 'pass1' },
-      { user: 'user2' , password: 'pass2' }
-      ]; 
       this.inicializa();
   }
  inicializa(){
-   this.storage.query('CREATE TABLE IF NOT EXISTS logins2 (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
+   this.storage.query('CREATE TABLE IF NOT EXISTS logins (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
             console.log("TABLE CREATED -> " + JSON.stringify(data.res));
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });
-  
+  //this.sync.sincronizate();
  //  this.logins.forEach (user => this.save(user));
  //  this.getData();
  }
