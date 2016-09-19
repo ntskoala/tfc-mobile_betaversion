@@ -20,6 +20,7 @@ export class Data {
  inicializa(){
    this.storage.query('CREATE TABLE IF NOT EXISTS logins (id INTEGER PRIMARY KEY, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
             console.log("TABLE CREATED  LOGINS-> " + JSON.stringify(data.res));
+          //  alert ('creada logins');
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });

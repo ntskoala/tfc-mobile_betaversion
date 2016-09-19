@@ -64,12 +64,12 @@ private storage;
 
 
   save(user){
-   alert ('saving' + user.nombre + ' ' + user.usuario);
+  // alert ('saving' + user.nombre + ' ' + user.usuario);
     //let newData = JSON.stringify(data);
     //this.storage.set('usuarios', newData);
               this.storage.query("INSERT INTO logins (id, user, password, tipouser, nombre) VALUES (?,?,?,?,?)",[user.idusuario,user.usuario,user.password,user.tipouser,user.nombre]).then((data) => {
                   console.log(JSON.stringify(data.res));
-                  alert("ok " + data.res);
+              //    alert("ok " + data.res);
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error " + JSON.stringify(error.err));

@@ -44,7 +44,7 @@ login(){
 
 this.data.getLogin(this.nombre,this.password);
 setTimeout (() => {
-  alert (this.data.logged);
+  //alert (this.data.logged);
   if (!isNaN(this.data.logged)){
     this.accesomenu.enable(true);
     this.navCtrl.setRoot(HomePage);
