@@ -47,7 +47,7 @@ export class MyApp {
       { title: 'menu.login' , component: LoginPage }
       ]; 
       
-
+      
       this.getDeviceDetails();
       StatusBar.styleDefault();
     });
