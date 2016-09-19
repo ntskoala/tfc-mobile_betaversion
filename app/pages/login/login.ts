@@ -36,6 +36,7 @@ this.navCtrl.setRoot(HomePage);
   }
 
 login(){
+  this.navCtrl.setRoot(ControlesPage);
 this.data.getLogin(this.nombre,this.password);
 setTimeout (() => {
   if (this.data.logged > 0){

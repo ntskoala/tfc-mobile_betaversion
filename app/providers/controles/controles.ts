@@ -9,19 +9,15 @@ import {Config} from '../../config/config';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class BandasService {
+export class ControlesService {
   private baseurl: string = this.config.baseurl;
 
   constructor(private http: Http, private config: Config) {}
 
-getlistadoBandas() {
 
-        let bandas = this.http.get(`${this.baseurl}/listadobandas.php`);
-        return bandas;
-    }
-getMisBandas(user)
+getMisControles(userid)
 {
-        let misbandas = this.http.get(`${this.baseurl}/loadbands_.php?uuid=${user}&_dc=1470480375978`);
-        return misbandas;
+        let miscontroles = this.http.get(`${this.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`);
+        return miscontroles;
     }
 }
