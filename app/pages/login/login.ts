@@ -15,8 +15,8 @@ import {SyncService} from '../../providers/sync/sync';
   providers: [Distancia,SyncService]
 })
 export class LoginPage {
-  public nombre: string;
-  public password: string;
+  public nombre: string = "demo";
+  public password: string = "demo";
   public miDistancia: any;
   public logged;
   public accesomenu: any;
@@ -44,7 +44,7 @@ login(){
 
 this.data.getLogin(this.nombre,this.password);
 setTimeout (() => {
-  //alert (this.data.logged);
+//  alert (this.data.logged);
   if (!isNaN(this.data.logged)){
     this.accesomenu.enable(true);
     this.navCtrl.setRoot(HomePage);

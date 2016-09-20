@@ -24,7 +24,8 @@ export class Data {
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });
-     this.storage.query('CREATE TABLE IF NOT EXISTS controles (id INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
+  this.storage.query('DROP TABLE IF EXISTS controles');
+     this.storage.query('CREATE TABLE IF NOT EXISTS controles (id INTEGER PRIMARY KEY, nombre TEXT, pla TEXT, minimo INTEGER, maximo INTEGER, objetivo INTEGER, tolerancia INTEGER, critico INTEGER)').then((data) => {
             console.log("TABLE CREATED CONTROLES-> " + JSON.stringify(data.res));
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
@@ -34,6 +35,14 @@ export class Data {
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });
+     this.storage.query('CREATE TABLE IF NOT EXISTS resultadoscontrol (id INTEGER PRIMARY KEY AUTOINCREMENT, idcontrol INTEGER, valor INTEGER, fecha TEXT)').then((data) => {
+            console.log("TABLE CREATED CONTROLES-> " + JSON.stringify(data.res));
+        }, (error) => {
+            console.log("ERROR -> " + JSON.stringify(error.err));
+  });
+
+
+
   //this.sync.sincronizate();
  //  this.logins.forEach (user => this.save(user));
  //  this.getData();

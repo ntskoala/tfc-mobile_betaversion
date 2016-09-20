@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Config } from '../../config/config';
-/*
+/* 
   Generated class for the Eventos provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html

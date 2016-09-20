@@ -25,7 +25,7 @@ private storage;
 
       
 //    if (this.hayConexion()){
-      this.sincronizate();
+      setTimeout(this.sincronizate(),500);
 //    }
 //      else {
 //        this.navCtrl.setRoot(LoginPage);
@@ -37,7 +37,9 @@ private storage;
   if (Network.connection == 'none'){ return false} else {return true}
   }
   sincronizate(){
-   // alert ('a trabajar');
+   //USUARIOS
+   //USUARIOS
+   // DESCARGA USUARIOS ENTONCES BORRA LOS LOCALES, LUEGO INSERTA LOS DESCARGADOS EN LOCAL.
             this.sync.getMisUsers().subscribe(
             data => {
                this.users = data.json();
@@ -52,12 +54,11 @@ private storage;
             err => console.error(err),
             () => console.log('getRepos completed')
         );  
- // this.users.forEach (user => this.save(user));
-//for (let usuario of this.users) {
-//  console.log(usuario.nombre);
-//}
 
-  //this.data.inicializa();
+        //CONTROLES
+        //CONTROLES
+        // DESCARGA CONTROLES ENTONCES BORRA LOS LOCALES, LUEGO INSERTA LOS DESCARGADOS EN LOCAL.
+
 
 
   }

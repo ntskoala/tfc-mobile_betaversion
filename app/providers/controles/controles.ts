@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Config} from '../../config/config';
+import {Storage, SqlStorage} from 'ionic-angular';
 /*
   Generated class for the Bandas provider.
 
@@ -11,13 +12,9 @@ import {Config} from '../../config/config';
 @Injectable()
 export class ControlesService {
   private baseurl: string = this.config.baseurl;
-
-  constructor(private http: Http, private config: Config) {}
-
-
-getMisControles(userid)
-{
-        let miscontroles = this.http.get(`${this.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`);
-        return miscontroles;
-    }
+  private storage: Storage;
+  private miscontroles: any;
+  constructor(private http: Http, private config: Config) {
+    this.storage = new Storage(SqlStorage, {name:'tfc'});
+  }
 }

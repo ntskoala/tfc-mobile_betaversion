@@ -8,7 +8,9 @@
         "sync": "sincronización",
         "login": "Login"
     },
-    "asistencia": "Asistencia"
+    "asistencia": "Asistencia",
+    "control": "control",
+    "checklist": "checklist"
 
 
 }
