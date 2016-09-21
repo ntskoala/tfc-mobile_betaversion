@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Camera } from 'ionic-native';
+import { Storage, SqlStorage } from 'ionic-angular';
+import {TranslateService} from 'ng2-translate';
 
 import {TranslatePipe} from 'ng2-translate';
 /*
@@ -11,15 +13,39 @@ import {TranslatePipe} from 'ng2-translate';
 */
 @Component({
   templateUrl: 'build/pages/control/control.html',
-  pipes: [TranslatePipe]
+  pipes: [TranslatePipe],
+  providers: [TranslateService]
 })
 export class ControlPage {
 public base64Image: string;
 public nombre: string;
-  constructor(private navCtrl: NavController, private navParams: NavParams) {
+public idcontrol: number;
+public valor: number;
+private storage: Storage;
+  constructor(private navCtrl: NavController, private navParams: NavParams, private translate: TranslateService) {
+
     this.nombre = this.navParams.get('control').nombre;
-    
+    this.idcontrol = this.navParams.get('control').id; 
+    this.storage = new Storage(SqlStorage, {name: 'tfc'});
+    translate.use('es');
   }
+
+terminar(idcontrol){
+ if (!isNaN(this.valor))
+ { 
+this.storage.query('INSERT INTO resultadoscontrol (idcontrol, valor) VALUES (?,?)',[idcontrol,this.valor]).then(
+  (Resultado) => { console.log(JSON.stringify(Resultado))  },
+  (error) => {console.log(JSON.stringify(error))}
+);
+ }
+ else
+ {
+
+  this.translate.get("alertas.errorvalor")
+  .subscribe(resultado => { alert(resultado);});
+//alert(this.translate.instant("errorvalor")); 
+} 
+}
 
 
 takeFoto(){

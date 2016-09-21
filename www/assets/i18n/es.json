@@ -8,9 +8,17 @@
         "sync": "sincronización",
         "login": "Login"
     },
+    "alertas": {
+        "error": "Error",
+         "errorvalor": "El valor tiene que se numérico y no puede estar vacío"
+    },
     "asistencia": "Asistencia",
     "control": "control",
-    "checklist": "checklist"
+    "checklist": "checklist",
+    "valor": "valor",
+    "foto": "foto",
+    "terminar": "terminar"
+   
 
 
 }

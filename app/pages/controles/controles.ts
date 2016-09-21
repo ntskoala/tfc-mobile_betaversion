@@ -17,10 +17,10 @@ import {TranslatePipe} from 'ng2-translate';
   pipes: [TranslatePipe]
 })
 export class ControlesPage {
-public controlesList2: Array<{nombre: string, min: number, max: number, critico: number}>;
+//public controlesList2: Array<{nombre: string, min: number, max: number, critico: number}>;
 public controlesList: any;
 public datos: any;
-public user: number = 1;
+//public user: number = 1;
 private storage: Storage;
   constructor(private navCtrl: NavController, private controlServicio: ControlesService) {
      this.storage = new Storage(SqlStorage, {name:'tfc'});

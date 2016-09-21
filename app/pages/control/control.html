@@ -10,7 +10,7 @@
          <button menuToggle>
       <ion-icon name='menu'></ion-icon>
 </button>
-    <ion-title>{{ nombre }}</ion-title>
+    <ion-title>{{ nombre }}, {{idcontrol}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -22,9 +22,15 @@
        <strong>{{nombre}}</strong>
      </ion-card-title>
     <ion-card-content>
-<button (click)="takeFoto()" twitter style="width: 100%;">foto</button> 
-Latest Picture:
+       <ion-item>
+        <ion-label floating>{{"valor" | translate}}</ion-label>
+        <ion-input type="text" [(ngModel)]="valor"></ion-input>
+      </ion-item>
+      <hr>   
+<button (click)="takeFoto()" twitter style="width: 100%;">{{"foto" | translate}}</button> 
+
       <img [src]="base64Image" *ngIf="base64Image" />
 </ion-card-content>
   </ion-card>
+  <button (click)="terminar(idcontrol)" twitter style="width: 100%;">{{"terminar" | translate}}</button> 
 </ion-content>
