@@ -46,19 +46,38 @@ sincronizate(){
                       }, (error) => {
                       console.log("ERROR -> " + JSON.stringify(error.err));
                       } );
-               this.miscontroles.forEach (control => this.save(control));
+               this.miscontroles.forEach (control => this.saveControl(control));
             },
             err => console.error(err),
-            () => console.log('getRepos completed')
+            () => console.log('getControles completed')
         );  
 
         //CONTROLES
         //CONTROLES
-        // DESCARGA CONTROLES ENTONCES BORRA LOS LOCALES, LUEGO INSERTA LOS DESCARGADOS EN LOCAL.
+ //CHECKLISTS
+   //CHECKLISTS
+   // DESCARGA CHECKLISTS ENTONCES BORRA LOS LOCALES, LUEGO INSERTA LOS DESCARGADOS EN LOCAL.
+            
+            this.sync.getMisChecklists(this.data.logged).subscribe(
+            data => {
+               this.miscontroles = data.json();
+                    this.storage.query("delete from checklist").then((data) => {
+                      console.log(JSON.stringify(data.res));
+                      }, (error) => {
+                      console.log("ERROR -> " + JSON.stringify(error.err));
+                      } );
+               this.miscontroles.forEach (checklist => this.saveChecklist(checklist));
+            },
+            err => console.error(err),
+            () => console.log('getChecklists completed')
+        );  
+
+        //CHECKLISTS
+        //CHECKLISTS
 
 }
 
-  save(control){
+  saveControl(control){
   // alert ('saving' + user.nombre + ' ' + user.usuario);
     //let newData = JSON.stringify(data);
     //this.storage.set('usuarios', newData);
@@ -66,12 +85,23 @@ sincronizate(){
                   console.log(JSON.stringify(data.res));
               //    alert("ok " + data.res);
               }, (error) => {
-                  console.log("ERROR -> " + JSON.stringify(error.err));
-                  alert("error " + JSON.stringify(error.err));
+                  console.log("ERROR SAVING CONTROL-> " + JSON.stringify(error.err));
+                  //alert("error " + JSON.stringify(error.err));
               });
 }
 
-
+  saveChecklist(checklist){
+  // alert ('saving' + user.nombre + ' ' + user.usuario);
+    //let newData = JSON.stringify(data);
+    //this.storage.set('usuarios', newData);
+              this.storage.query("INSERT INTO checklist (idchecklist, nombrechecklist, idcontrol, nombrecontrol) VALUES (?,?,?,?)",[checklist.idchecklist,checklist.nombrechecklist,checklist.idcontrolchecklist,checklist.nombre]).then((data) => {
+                  console.log(JSON.stringify(data));
+              //    alert("ok " + data.res);
+              }, (error) => {
+                  console.log("ERROR SAVING CHECKLIST -> " + JSON.stringify(error));
+                 // alert("error " + JSON.stringify(error.err));
+              });
+}
 
 
 controles(){

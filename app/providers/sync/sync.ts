@@ -18,6 +18,13 @@ getMisControles(userid)
         return miscontroles;
     }
 
+getMisChecklists(userid)
+{
+        let miscontroles = this.http.get(`${this.config.baseurl}/views/getchecklists.php?userid=${userid}&_dc=1470480375978`);
+        return miscontroles;
+    }
+
+
 getMisUsers()
 {
     //alert ('idempresa' + this.config.idempresa);
