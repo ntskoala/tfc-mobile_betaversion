@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { Network } from 'ionic-native';
 import {SyncService} from '../../providers/sync/sync';
 import {LoginPage} from '../login/login';
+import {HomePage} from '../home/home';
 import {TranslatePipe} from 'ng2-translate';
 /*
   Generated class for the SyncPage page.
@@ -49,7 +50,11 @@ private storage;
                       console.log("ERROR -> " + JSON.stringify(error.err));
                       } );
                this.users.forEach (user => this.save(user));
+ //              if (isNaN(sessionStorage.getItem("logged")))
+ //              {
                this.navCtrl.setRoot(LoginPage);
+ //              }
+ //              else { this.navCtrl.setRoot(HomePage); }
             },
             err => console.error(err),
             () => console.log('getRepos completed')

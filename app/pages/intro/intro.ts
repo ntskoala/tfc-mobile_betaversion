@@ -28,4 +28,5 @@ pager: true
 goToLogin(){
   this.navCtrl.setRoot(LoginPage);
 }
+
 }

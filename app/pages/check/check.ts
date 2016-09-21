@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController, NavParams } from 'ionic-angular';
+import {Storage, SqlStorage} from 'ionic-angular';
 
 import {TranslatePipe} from 'ng2-translate';
 /*
@@ -14,9 +14,38 @@ import {TranslatePipe} from 'ng2-translate';
   pipes: [TranslatePipe]
 })
 export class CheckPage {
-
-  constructor(private navCtrl: NavController) {
+public checklistcontroles: any;
+public checks: any;
+private storage: Storage;
+public idchecklist;
+public nombrechecklist: string;
+  constructor(private navCtrl: NavController, private params: NavParams) {
+         this.storage = new Storage(SqlStorage, {name:'tfc'});
+        this.idchecklist =  this.params.get('checklist').idchecklist;
+        this.nombrechecklist = this.params.get('checklist').nombrechecklist;
+        this.getChecklists(this.idchecklist);
 
   }
+getChecklists(idchecklist){
+                  this.storage.query("Select * FROM checklist WHERE idchecklist = ?",[idchecklist]).then((data) => {
+                  this.checklistcontroles = data.res.rows; 
+              }, (error) => {
+                  console.log("ERROR -> " + JSON.stringify(error.err));
+                  alert("error " + JSON.stringify(error.err));
+              }); 
+}
+
+terminar(){
+  console.log(this.checklistcontroles); 
+  for(var index in this.checklistcontroles) { 
+    var attr = this.checklistcontroles[index]; 
+    alert ('control ' + attr.idcontrol);
+}
+
+}
+
+editar (idchecklist){
+  alert('editando' + idchecklist);
+}
 
 }

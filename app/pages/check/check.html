@@ -10,12 +10,16 @@
          <button menuToggle>
       <ion-icon name='menu'></ion-icon>
 </button>
-    <ion-title>{{"menu.check" | translate }}</ion-title>
+    <ion-title>{{ nombrechecklist }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+<ion-item *ngFor="let control of checklistcontroles" (click)="terminar(idchecklist)" (swipe)="editar(idchecklist)">
+  <ion-label>{{control.nombrecontrol}}</ion-label>
+  <ion-checkbox id={{control.idcontrol}}></ion-checkbox>
+</ion-item>
+<button (click)="terminar()">terminar</button>
 </ion-content>

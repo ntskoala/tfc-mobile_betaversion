@@ -27,8 +27,20 @@ private storage: Storage;
     this.getControles();
   }
     getControles() {
-                  this.storage.query("Select * FROM controles").then((data) => {
+                  this.storage.query("SELECT * FROM controles").then((data) => {
                   this.controlesList = data.res.rows; 
+                  //alert ('rows: ' + data.rows.item(0).id);
+                  //alert('count' + data.res.rows.length);
+//                  alert ('id' + data.res.rows.item(0).id);
+//for(let i = 0; i < data.res.rows.length; i++) {
+//                this.controlesList.push({
+//                    "id": data.res.rows.item(i).id,
+//                    "nombre": data.res.rows.item(i).nombre,
+//                });
+
+
+
+
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error " + JSON.stringify(error.err));

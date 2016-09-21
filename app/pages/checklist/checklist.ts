@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-//import { ControlPage } from '../control/control';//CAMBIAR A CHECKPAGE
-import { ControlesService} from '../../providers/controles/controles';
+import { CheckPage } from '../check/check';
+//import { ControlesService} from '../../providers/controles/controles';
 import {Storage, SqlStorage} from 'ionic-angular';
 
 import {TranslatePipe} from 'ng2-translate';
@@ -33,8 +33,7 @@ getChecklists(){
 }
 
 takeChecklist(checklist){
-
-
+this.navCtrl.push(CheckPage,{checklist});
 }
 
 

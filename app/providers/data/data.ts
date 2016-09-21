@@ -65,6 +65,7 @@ public getLogin(nombre: string, password:string){
 this.storage.query('select * from logins WHERE user = ? AND password = ?',[nombre,password]).then((data) => {
     if (data.res.rows.length >0){
     this.logged = data.res.rows.item(0).id;
+    sessionStorage.setItem("login",data.res.rows.item(0).id);
     }
     else{
         this.logged = undefined;

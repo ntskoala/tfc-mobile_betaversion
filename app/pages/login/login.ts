@@ -21,12 +21,14 @@ export class LoginPage {
   public logged;
   public accesomenu: any;
   public local: Storage;
+  public result;
   constructor(public navCtrl: NavController, menu: MenuController,private distancia: Distancia, private data:Data) {
     menu.enable(false);
 this.local = new Storage(LocalStorage);
 this.local.get('intro').then((result) => {
+//this.result = sessionStorage.getItem("intro");
   if(!result){
-    this.local.set('intro', true);
+   // this.local.set('intro', true);
     this.navCtrl.setRoot(IntroPage);
   }
 });
