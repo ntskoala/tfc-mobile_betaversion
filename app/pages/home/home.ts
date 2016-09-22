@@ -41,7 +41,13 @@ sincronizate(){
             
             this.sync.getMisControles(this.data.logged).subscribe(
             data => {
-               this.miscontroles = data.json();
+              //test
+              this.miscontroles = JSON.parse(data.json());
+              console.log('resultado' + this.miscontroles.success);
+              console.log('success: ' +this.miscontroles.data[0].nombre);
+              if (this.miscontroles.success){
+              //test
+               this.miscontroles = this.miscontroles.data;
                     this.storage.query("delete from controles").then((data) => {
                       console.log(JSON.stringify(data.res));
                       }, (error) => {
@@ -49,6 +55,7 @@ sincronizate(){
                       //alert("Error 1");
                       } );
                this.miscontroles.forEach (control => this.saveControl(control));
+              }
             },
             err => console.error(err),
             () => console.log('getControles completed')

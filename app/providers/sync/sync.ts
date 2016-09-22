@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Config } from '../../config/config';
 /* 
@@ -12,8 +12,17 @@ import { Config } from '../../config/config';
 export class SyncService {
   constructor(private http: Http, private config: Config) {}
 
+createAuthorizationHeader(headers:Headers) {
+    headers.append('Authorization', 'Basic ' +
+      btoa('username:password')); 
+  }
+
+
 getMisControles(userid)
 {
+            let headers = new Headers();
+            this.createAuthorizationHeader(headers);
+ //       let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`,{headers:headers});
         let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`);
         return miscontroles;
     }

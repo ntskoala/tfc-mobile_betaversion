@@ -43,7 +43,10 @@ private storage;
    // DESCARGA USUARIOS ENTONCES BORRA LOS LOCALES, LUEGO INSERTA LOS DESCARGADOS EN LOCAL.
             this.sync.getMisUsers().subscribe(
             data => {
-               this.users = data.json();
+               this.users = JSON.parse(data.json());
+                if (this.users.success){
+              //test
+               this.users = this.users.data;
                     this.storage.query("delete from logins").then((data) => {
                       console.log(JSON.stringify(data.res));
                       }, (error) => {
@@ -55,7 +58,9 @@ private storage;
                this.navCtrl.setRoot(LoginPage);
  //              }
  //              else { this.navCtrl.setRoot(HomePage); }
-            },
+            
+                }
+        },
             err => console.error(err),
             () => console.log('getRepos completed')
         );  
