@@ -68,17 +68,24 @@ sincronizate(){
    //CHECKLISTS
    // DESCARGA CHECKLISTS ENTONCES BORRA LOS LOCALES, LUEGO INSERTA LOS DESCARGADOS EN LOCAL.
             
-            this.sync.getMisChecklists(this.data.logged).subscribe(
+            this.sync.getMisChecklists(this.data.logged).map(res => res.json()).subscribe(
             data => {
-               this.mischecks = data.json();
+               this.mischecks = JSON.parse(data);
+                    console.log('resultado check: ' + this.mischecks.success);
+                    console.log('success check: ' +this.mischecks.data[0].nombre);
+                if (this.mischecks.success){
+                  //test
+                    this.mischecks = this.mischecks.data;
+                    console.log("mischecklists: " + this.mischecks);       
                     this.storage.query("delete from checklist").then((data) => {
                       console.log(JSON.stringify(data.res));
                       }, (error) => {
                       console.log("ERROR -> " + JSON.stringify(error.err));
                       //alert("Error 2");
                       } );
-               this.mischecks.forEach (checklist => this.saveChecklist(checklist));
-            },
+                      this.mischecks.forEach (checklist => this.saveChecklist(checklist));
+                  }
+              },
             err => console.error(err),
             () => console.log('getChecklists completed')
         );  
@@ -92,7 +99,7 @@ sincronizate(){
   // alert ('saving' + user.nombre + ' ' + user.usuario);
     //let newData = JSON.stringify(data);
     //this.storage.set('usuarios', newData);
-              this.storage.query("INSERT INTO controles (id, nombre, pla, minimo, maximo, objetivo, tolerancia, critico) VALUES (?,?,?,?,?,?,?,?)",[control.idcontrol,control.nombre,control.pla,control.minimo,control.maximo,control.objetivo,control.tolerancia,control.critico]).then((data) => {
+              this.storage.query("INSERT INTO controles (id, nombre, pla, minimo, maximo, objetivo, tolerancia, critico) VALUES (?,?,?,?,?,?,?,?)",[control.id,control.nombre,control.pla,control.minimo,control.maximo,control.objetivo,control.tolerancia,control.critico]).then((data) => {
                   console.log(JSON.stringify(data.res));
                   //alert("ok control" + data.res);
               }, (error) => {
@@ -102,10 +109,9 @@ sincronizate(){
 }
 
   saveChecklist(checklist){
-  // alert ('saving' + user.nombre + ' ' + user.usuario);
     //let newData = JSON.stringify(data);
     //this.storage.set('usuarios', newData);
-              this.storage.query("INSERT INTO checklist (idchecklist, nombrechecklist, idcontrol, nombrecontrol) VALUES (?,?,?,?)",[checklist.idchecklist,checklist.nombrechecklist,checklist.idcontrolchecklist,checklist.nombre]).then((data) => {
+              this.storage.query("INSERT INTO checklist (idchecklist, nombrechecklist, idcontrol, nombrecontrol) VALUES (?,?,?,?)",[checklist.idchecklist,checklist.nombrechecklist,checklist.id,checklist.nombre]).then((data) => {
                   console.log(JSON.stringify(data));
                   //alert("ok checklist" + data.res);
               }, (error) => {

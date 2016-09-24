@@ -25,7 +25,8 @@ private storage: Storage;
 
 getChecklists(){
                   this.storage.query("Select * FROM checklist GROUP BY idchecklist").then((data) => {
-                  this.checklistList = data.res.rows; 
+                  this.checklistList = data.res.rows;
+                  console.log ("checklist:" + this.checklistList);
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error " + JSON.stringify(error.err));

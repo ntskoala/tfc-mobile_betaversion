@@ -13,8 +13,7 @@ export class SyncService {
   constructor(private http: Http, private config: Config) {}
 
 createAuthorizationHeader(headers:Headers) {
-    headers.append('Authorization', 'Basic ' +
-      btoa('username:password')); 
+    headers.append('token', 'qwerty123456'); 
   }
 
 
@@ -22,8 +21,8 @@ getMisControles(userid)
 {
             let headers = new Headers();
             this.createAuthorizationHeader(headers);
- //       let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`,{headers:headers});
-        let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`);
+//        let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`,{headers:headers});
+       let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`);
         return miscontroles;
     }
 

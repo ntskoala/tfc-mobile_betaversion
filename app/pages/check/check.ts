@@ -28,11 +28,15 @@ public nombrechecklist: string;
   }
 getChecklists(idchecklist){
                   this.storage.query("Select * FROM checklist WHERE idchecklist = ?",[idchecklist]).then((data) => {
-                  this.checklistcontroles = data.res.rows; 
+                  this.checklistcontroles = data.res.rows;
+                  //this.checklistcontroles = JSON.parse(data.res.rows);
+                  console.log (this.checklistcontroles);
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error " + JSON.stringify(error.err));
               }); 
+
+
 }
 
 terminar(){

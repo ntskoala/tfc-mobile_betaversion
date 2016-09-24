@@ -29,6 +29,7 @@ private storage: Storage;
     getControles() {
                   this.storage.query("SELECT * FROM controles").then((data) => {
                   this.controlesList = data.res.rows; 
+                  console.log ("controles:" + this.controlesList);
                   //alert ('rows: ' + data.rows.item(0).id);
                   //alert('count' + data.res.rows.length);
 //                  alert ('id' + data.res.rows.item(0).id);
