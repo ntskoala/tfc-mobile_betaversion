@@ -3,7 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { Storage, SqlStorage } from 'ionic-angular';
 import {TranslateService} from 'ng2-translate';
-
+import {SyncService} from '../../providers/sync/sync';
 import {TranslatePipe} from 'ng2-translate';
 /*
   Generated class for the ControlPage page.
@@ -14,7 +14,7 @@ import {TranslatePipe} from 'ng2-translate';
 @Component({
   templateUrl: 'build/pages/control/control.html',
   pipes: [TranslatePipe],
-  providers: [TranslateService]
+  providers: [TranslateService, SyncService]
 })
 export class ControlPage {
 public base64Image: string;
@@ -22,7 +22,7 @@ public nombre: string;
 public idcontrol: number;
 public valor: number;
 private storage: Storage;
-  constructor(private navCtrl: NavController, private navParams: NavParams, private translate: TranslateService) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, private translate: TranslateService, private sync: SyncService) {
 
     this.nombre = this.navParams.get('control').nombre;
     this.idcontrol = this.navParams.get('control').id; 
@@ -34,7 +34,11 @@ terminar(idcontrol){
  if (!isNaN(this.valor))
  { 
 this.storage.query('INSERT INTO resultadoscontrol (idcontrol, valor) VALUES (?,?)',[idcontrol,this.valor]).then(
-  (Resultado) => { console.log(JSON.stringify(Resultado))  },
+  (Resultado) => { //console.log(Resultado);
+                  //alert('resultado1');
+                  this.sync.setResultados(JSON.stringify(Resultado));
+                  localStorage.setItem("sync","true");
+                  },
   (error) => {console.log(JSON.stringify(error))}
 );
  }

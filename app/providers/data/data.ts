@@ -36,7 +36,7 @@ export class Data {
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });
-  this.storage.query('DROP TABLE IF EXISTS resultadoscontrol');
+  //this.storage.query('DROP TABLE IF EXISTS resultadoscontrol');
      this.storage.query('CREATE TABLE IF NOT EXISTS resultadoscontrol (id INTEGER PRIMARY KEY AUTOINCREMENT, idcontrol INTEGER, valor INTEGER, fecha DATETIME DEFAULT CURRENT_TIMESTAMP)').then((data) => {
             console.log("TABLE CREATED CONTROLES-> " + JSON.stringify(data.res));
         }, (error) => {

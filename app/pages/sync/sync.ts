@@ -27,6 +27,11 @@ private storage;
       
 //    if (this.hayConexion()){
       setTimeout(this.sincronizate(),500);
+      if (localStorage.getItem("sync"))
+      {
+        this.send_data();
+      }
+
 //    }
 //      else {
 //        this.navCtrl.setRoot(LoginPage);
@@ -87,6 +92,17 @@ private storage;
               });
 }
 
+send_data(){
+  //alert("hay sinc");
+                this.storage.query("select * from resultadoscontrol").then((data) => {
+                //  console.log(JSON.stringify(data.res.rows));
 
+                  //alert("ok -> filas: " + data.res.rows.length);
+                  this.sync.setResultados(JSON.stringify(data.res.rows));
+              }, (error) => {
+                  console.log("ERROR -> " + JSON.stringify(error.err));
+                  alert("error, no se han podido recuperar los datos " + JSON.stringify(error.err));
+              });
+}
 
 }
