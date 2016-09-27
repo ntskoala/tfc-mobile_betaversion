@@ -34,10 +34,11 @@ terminar(idcontrol){
  if (!isNaN(this.valor))
  { 
 this.storage.query('INSERT INTO resultadoscontrol (idcontrol, valor) VALUES (?,?)',[idcontrol,this.valor]).then(
-  (Resultado) => { //console.log(Resultado);
+  (Resultado) => { console.log(Resultado);
                   //alert('resultado1');
-                  this.sync.setResultados(JSON.stringify(Resultado));
+                  //this.sync.setResultados(JSON.stringify(Resultado));
                   localStorage.setItem("sync","true");
+                  this.navCtrl.pop();
                   },
   (error) => {console.log(JSON.stringify(error))}
 );

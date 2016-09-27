@@ -3,6 +3,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 import { Config } from '../../config/config';
+import {Storage, SqlStorage} from 'ionic-angular';
 /* 
   Generated class for the Eventos provider.
 
@@ -13,6 +14,7 @@ import { Config } from '../../config/config';
 export class SyncService {
   constructor(private http: Http, private config: Config) {}
 private posturl: string;
+private storage;
 createAuthorizationHeader(headers:Headers) {
     headers.append('token', 'qwerty123456'); 
   }
@@ -52,12 +54,27 @@ setResultados(resultados)
         headers.append('Content-type', 'form-data');
         // devuelve un Observable
         return this.http.post(this.posturl, params, {headers: headers})
+            //.map(data => { data.json()})
             .subscribe(res => {
-                        //res.json();
-                        console.log("post: " + res);
+                        var respuesta = res.json();
+                        console.log (respuesta.success);
+                        if (respuesta.success== "true"){
+                            console.log("insert correcto");
+                            ///BORRAR DATOS TABLA RESULTADOSCONTROL 
+                           //     this.storage = new Storage(SqlStorage, {name:'tfc'});
+                           //     this.storage.query("delete from resultadoscontrol").then((data) => {
+                           //     console.log (JSON.stringify(data.res));
+                           //      }, (error) => {
+                           //     console.log("ERROR -> " + JSON.stringify(error.err));
+                           //         });   
+                            }
+                        else {
+                            console.log ("ERROR EN EL INSERT");
+                            }
+
                         },
                         error => {
-                            console.log("error post: " + error.json());
+                            console.log("error post: " + error);
                         } );
  //   this.http.post(`${this.config.baseurl}/actions/getusers.php?idempresa=${this.config.idempresa}&_dc=1470480375978`,);
 }
