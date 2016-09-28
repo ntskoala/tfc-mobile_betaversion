@@ -43,10 +43,10 @@ getMisUsers()
         return misusers;
     }
 
-setResultados(resultados)
+setResultados(resultados,table)
 {
    console.log('resultados:' +resultados);
-    this.posturl = this.config.baseurl+'/actions/setresultadoscontrol.php';
+    this.posturl = this.config.baseurl+'/actions/set'+table+'.php';
     
         let params = resultados;
         let headers = new Headers();

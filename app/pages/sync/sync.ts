@@ -95,14 +95,26 @@ private storage;
 sync_data(){
   //alert("hay sinc");
                 this.storage.query("select idcontrol,resultado,fecha,foto from resultadoscontrol").then((data) => {
-                //  console.log(JSON.stringify(data.res.rows));
-
-                  //alert("ok -> filas: " + data.res.rows.length);
-                  this.sync.setResultados(JSON.stringify(data.res.rows));
+                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontrol");
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
-                  alert("error, no se han podido recuperar los datos " + JSON.stringify(error.err));
+                  alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
               });
+
+                this.storage.query("select idchecklist,fecha,foto from resultadoschecklist").then((data) => {
+                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoschecklist");
+              }, (error) => {
+                  console.log("ERROR -> " + JSON.stringify(error.err));
+                  alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
+              });
+
+                this.storage.query("select idcontrolchecklist,resultado,descripcion from resultadoscontroleschecklist").then((data) => {
+                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontroleschecklist");
+              }, (error) => {
+                  console.log("ERROR -> " + JSON.stringify(error.err));
+                  alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
+              });
+
 }
 
 }

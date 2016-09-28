@@ -31,7 +31,7 @@ export class Data {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });
   this.storage.query('DROP TABLE IF EXISTS checklist');
-       this.storage.query('CREATE TABLE IF NOT EXISTS checklist (id INTEGER PRIMARY KEY AUTOINCREMENT, idchecklist INTEGER, nombrechecklist TEXT, idcontrol INT, nombrecontrol TEXT, checked INT DEFAULT 0)').then((data) => {
+       this.storage.query('CREATE TABLE IF NOT EXISTS checklist (id INTEGER PRIMARY KEY AUTOINCREMENT, idchecklist INTEGER, nombrechecklist TEXT, idcontrol INT, nombrecontrol TEXT, checked TEXT DEFAULT "false")').then((data) => {
             console.log("TABLE CREATED CHECKLIST-> " + JSON.stringify(data.res));
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
@@ -42,8 +42,16 @@ export class Data {
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error));
   });
-
-
+     this.storage.query('CREATE TABLE IF NOT EXISTS resultadoschecklist (id INTEGER PRIMARY KEY AUTOINCREMENT, idchecklist INTEGER, fecha DATETIME DEFAULT CURRENT_TIMESTAMP, foto TEXT)').then((data) => {
+            console.log("TABLE CREATED CONTROLES-> " + JSON.stringify(data.res));
+        }, (error) => {
+            console.log("ERROR -> " + JSON.stringify(error));
+  });
+     this.storage.query('CREATE TABLE IF NOT EXISTS resultadoscontroleschecklist (id INTEGER PRIMARY KEY AUTOINCREMENT, idcontrolchecklist INTEGER, resultado TEXT, descripcion TEXT)').then((data) => {
+            console.log("TABLE CREATED CONTROLES-> " + JSON.stringify(data.res));
+        }, (error) => {
+            console.log("ERROR -> " + JSON.stringify(error));
+  });
 
   //this.sync.sincronizate();
  //  this.logins.forEach (user => this.save(user));

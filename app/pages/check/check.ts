@@ -17,6 +17,7 @@ export class Checks {
   idcontrol:number;
   nombrecontrol:string;
   checked:boolean;
+  descripcion: string;
 }
 
 
@@ -32,6 +33,7 @@ public checks: any;
 private storage: Storage;
 public idchecklist;
 public nombrechecklist: string;
+public base64Image;
   constructor(private navCtrl: NavController, private params: NavParams) {
          this.storage = new Storage(SqlStorage, {name:'tfc'});
         this.idchecklist =  this.params.get('checklist').idchecklist;
@@ -58,25 +60,22 @@ getChecklists(idchecklist){
 
 
 }
-check(control)
-{
-  alert (control.checked);
-  control.checked = !control.checked;
-  alert(control.checked);
-}
+
+
 terminar(){
-  console.log(this.checklistcontroles); 
+  console.log(this.checklistcontroles);
+      this.storage.query('INSERT INTO resultadoschecklist (idchecklist, foto) VALUES (?,?)',[this.idchecklist,this.base64Image]).then(
+  (Resultado) => { console.log(Resultado);},
+  (error) => {console.log(JSON.stringify(error))});
   for(var index in this.checklistcontroles) { 
     var attr = this.checklistcontroles[index];
-    var selector = "check" + attr.idcontrol;
-    //document.getElementById(selector)
-    alert ('control ' + attr.idcontrol);
+    alert ('control ' + attr.idcontrol + 'checked:' + attr.checked);
+    this.storage.query('INSERT INTO resultadoscontroleschecklist (idcontrolchecklist, resultado, descripcion) VALUES (?,?,?)',[attr.idcontrol,attr.checked,attr.descripcion]).then(
+  (Resultado) => { console.log(Resultado);},
+  (error) => {console.log(JSON.stringify(error))});
 }
 
 }
 
-editar (idchecklist){
-  alert('editando' + idchecklist);
-}
 
 }
