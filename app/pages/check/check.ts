@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {Storage, SqlStorage} from 'ionic-angular';
-
+import { Camera } from 'ionic-native';
 import {TranslatePipe} from 'ng2-translate';
 /*
   Generated class for the CheckPage page.
@@ -69,13 +69,27 @@ terminar(){
   (error) => {console.log(JSON.stringify(error))});
   for(var index in this.checklistcontroles) { 
     var attr = this.checklistcontroles[index];
-    alert ('control ' + attr.idcontrol + 'checked:' + attr.checked);
     this.storage.query('INSERT INTO resultadoscontroleschecklist (idcontrolchecklist, resultado, descripcion) VALUES (?,?,?)',[attr.idcontrol,attr.checked,attr.descripcion]).then(
   (Resultado) => { console.log(Resultado);},
   (error) => {console.log(JSON.stringify(error))});
 }
 
 }
-
-
+takeFoto(){
+  this.base64Image = "data:image/jpeg;base64,";
+  Camera.getPicture({
+        destinationType: Camera.DestinationType.DATA_URL,
+        targetWidth: 1000,
+        targetHeight: 1000
+    }).then((imageData) => {
+      // imageData is a base64 encoded string
+        this.base64Image = "data:image/jpeg;base64," + imageData;
+        
+    }, (err) => {
+        console.log(err);
+    });
+  }
+editar(control){
+  alert (control.idcontrol + " " + control.descripcion);
+}
 }

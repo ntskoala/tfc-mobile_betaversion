@@ -17,9 +17,18 @@
 
 
 <ion-content padding>
-<ion-item *ngFor="let control of checklistcontroles">
+<ion-item *ngFor="let control of checklistcontroles" (swipe)="editar(control)">
   <ion-label >{{control.nombrecontrol}}</ion-label>
   <ion-checkbox [(ngModel)]="control.checked"></ion-checkbox>
 </ion-item>
-<button (click)="terminar()">terminar</button>
+      <hr>   
+<button (click)="takeFoto()" twitter style="width: 48%;">{{"foto" | translate}}</button> 
+<button (click)="terminar()" twitter style="width: 48%;">{{"terminar" | translate}}</button> 
+   <ion-card>
+     <ion-card-title>
+     </ion-card-title>
+    <ion-card-content>
+      <img [src]="base64Image" *ngIf="base64Image" />
+</ion-card-content>
+  </ion-card>
 </ion-content>

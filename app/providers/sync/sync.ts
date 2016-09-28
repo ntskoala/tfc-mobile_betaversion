@@ -60,13 +60,11 @@ setResultados(resultados,table)
                         console.log (respuesta.success);
                         if (respuesta.success== "true"){
                             console.log("insert correcto");
-                            ///BORRAR DATOS TABLA RESULTADOSCONTROL 
-                           //     this.storage = new Storage(SqlStorage, {name:'tfc'});
-                           //     this.storage.query("delete from resultadoscontrol").then((data) => {
-                           //     console.log (JSON.stringify(data.res));
-                           //      }, (error) => {
-                           //     console.log("ERROR -> " + JSON.stringify(error.err));
-                           //         });   
+                            ///BORRAR DATOS TABLA 
+                                this.storage = new Storage(SqlStorage, {name:'tfc'});
+                                this.storage.query("delete from " + table).then(
+                                (data) => { console.log (JSON.stringify(data.res));}, 
+                                (error) => { console.log("ERROR -> " + JSON.stringify(error.err));});   
                             }
                         else {
                             console.log ("ERROR EN EL INSERT");
