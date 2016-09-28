@@ -56,7 +56,7 @@ setResultados(resultados)
         return this.http.post(this.posturl, params, {headers: headers})
             //.map(data => { data.json()})
             .subscribe(res => {
-                        var respuesta = res.json();
+                        var respuesta = JSON.parse(res.json());
                         console.log (respuesta.success);
                         if (respuesta.success== "true"){
                             console.log("insert correcto");

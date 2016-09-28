@@ -17,5 +17,5 @@
 
 
 <ion-content padding>
- <button *ngFor="let control of controlesList" (click)="takeControl(control)" twitter style="width: 100%;">{{control.nombre}}</button>
+ <button id="{{control.nombre}}" [disabled]="yaesta" *ngFor="let control of controlesList" (click)="takeControl(control)" twitter style="width: 100%;">{{control.nombre}}</button>
 </ion-content>

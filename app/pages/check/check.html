@@ -17,9 +17,9 @@
 
 
 <ion-content padding>
-<ion-item *ngFor="let control of checklistcontroles" (click)="terminar(idchecklist)" (swipe)="editar(idchecklist)">
+<ion-item *ngFor="let control of checklistcontroles">
   <ion-label>{{control.nombrecontrol}}</ion-label>
   <ion-checkbox id={{control.idcontrol}}></ion-checkbox>
 </ion-item>
-<button (click)="terminar()">terminar</button>
+<button (click)="terminar2()">terminar</button>
 </ion-content>

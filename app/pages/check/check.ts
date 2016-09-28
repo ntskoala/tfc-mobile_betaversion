@@ -38,7 +38,7 @@ getChecklists(idchecklist){
 
 
 }
-
+terminar2(){}
 terminar(){
   console.log(this.checklistcontroles); 
   for(var index in this.checklistcontroles) { 

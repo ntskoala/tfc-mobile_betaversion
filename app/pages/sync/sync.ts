@@ -29,7 +29,7 @@ private storage;
       setTimeout(this.sincronizate(),500);
       if (localStorage.getItem("sync"))
       {
-        this.send_data();
+        this.sync_data();
       }
 
 //    }
@@ -92,9 +92,9 @@ private storage;
               });
 }
 
-send_data(){
+sync_data(){
   //alert("hay sinc");
-                this.storage.query("select * from resultadoscontrol").then((data) => {
+                this.storage.query("select idcontrol,resultado,fecha,foto from resultadoscontrol").then((data) => {
                 //  console.log(JSON.stringify(data.res.rows));
 
                   //alert("ok -> filas: " + data.res.rows.length);

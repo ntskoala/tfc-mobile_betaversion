@@ -17,6 +17,7 @@ import {LoginPage} from '../login/login';
   pipes: [TranslatePipe]
 })
 export class IntroPage {
+public intro;
 
 slideOptions: any;
   constructor(public navCtrl: NavController, menu: MenuController, private data:Data) {
@@ -26,7 +27,10 @@ pager: true
 };
   }
 goToLogin(){
+  sessionStorage.setItem("introvista","true");
   this.navCtrl.setRoot(LoginPage);
 }
-
+setintro(){
+ localStorage.setItem("intro",this.intro);
+}
 }

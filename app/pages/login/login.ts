@@ -22,15 +22,19 @@ export class LoginPage {
   public accesomenu: any;
   public local: Storage;
   public result;
+  public introvista;
   constructor(public navCtrl: NavController, menu: MenuController,private distancia: Distancia, private data:Data) {
     menu.enable(false);
 this.local = new Storage(LocalStorage);
 this.local.get('intro').then((result) => {
-//this.result = sessionStorage.getItem("intro");
-  if(!result){
-   // this.local.set('intro', true);
+this.introvista = sessionStorage.getItem("introvista");
+  if(result != "true"){
+    if (this.introvista != "true")
+    {
     this.navCtrl.setRoot(IntroPage);
+    }
   }
+
 });
 
 

@@ -28,9 +28,9 @@
       </ion-item>
       <hr>   
 <button (click)="takeFoto()" twitter style="width: 100%;">{{"foto" | translate}}</button> 
-
+<button (click)="terminar(idcontrol)" twitter style="width: 100%;">{{"terminar" | translate}}</button> 
       <img [src]="base64Image" *ngIf="base64Image" />
 </ion-card-content>
   </ion-card>
-  <button (click)="terminar(idcontrol)" twitter style="width: 100%;">{{"terminar" | translate}}</button> 
+  
 </ion-content>

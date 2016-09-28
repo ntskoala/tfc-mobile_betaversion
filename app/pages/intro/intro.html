@@ -26,6 +26,10 @@
 <ion-slide>
 <ion-row>
 <ion-col>
+  <ion-item>
+  <ion-label>No volver a mostrar</ion-label>
+  <ion-checkbox [(ngModel)]="intro" (ionChange)="setintro()"></ion-checkbox>
+  </ion-item>
 <button light (click)="goToLogin()" style="margin-top:20px;">Login</button>
 </ion-col>
 </ion-row>

@@ -5,6 +5,7 @@ import { Storage, SqlStorage } from 'ionic-angular';
 import {TranslateService} from 'ng2-translate';
 import {SyncService} from '../../providers/sync/sync';
 import {TranslatePipe} from 'ng2-translate';
+
 /*
   Generated class for the ControlPage page.
 
@@ -32,20 +33,21 @@ private storage: Storage;
 
 terminar(idcontrol){
  if (!isNaN(this.valor))
- { 
-this.storage.query('INSERT INTO resultadoscontrol (idcontrol, valor) VALUES (?,?)',[idcontrol,this.valor]).then(
+ {
+this.storage.query('INSERT INTO resultadoscontrol (idcontrol, resultado, foto) VALUES (?,?,?)',[idcontrol,this.valor,this.base64Image]).then(
   (Resultado) => { console.log(Resultado);
                   //alert('resultado1');
                   //this.sync.setResultados(JSON.stringify(Resultado));
                   localStorage.setItem("sync","true");
+                  var date = new Date();
+                  var fecha = date.getDate().toString() + date.getMonth().toString();
+                  localStorage.setItem (idcontrol, fecha);
                   this.navCtrl.pop();
                   },
-  (error) => {console.log(JSON.stringify(error))}
-);
+  (error) => {console.log(JSON.stringify(error))});
  }
- else
+ else // NO HAY UN NUMERO EN RESULTADO
  {
-
   this.translate.get("alertas.errorvalor")
   .subscribe(resultado => { alert(resultado);});
 //alert(this.translate.instant("errorvalor")); 
@@ -54,6 +56,7 @@ this.storage.query('INSERT INTO resultadoscontrol (idcontrol, valor) VALUES (?,?
 
 
 takeFoto(){
+  this.base64Image = "data:image/jpeg;base64,";
   Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
         targetWidth: 1000,
@@ -61,6 +64,7 @@ takeFoto(){
     }).then((imageData) => {
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
+        
     }, (err) => {
         console.log(err);
     });

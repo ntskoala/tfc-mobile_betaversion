@@ -20,6 +20,7 @@ export class ControlesPage {
 //public controlesList2: Array<{nombre: string, min: number, max: number, critico: number}>;
 public controlesList: any;
 public datos: any;
+
 //public user: number = 1;
 private storage: Storage;
   constructor(private navCtrl: NavController, private controlServicio: ControlesService) {
@@ -45,7 +46,8 @@ private storage: Storage;
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error " + JSON.stringify(error.err));
-              }); 
+              });
+              this.FormatControl(); 
     }
 
 
@@ -54,5 +56,15 @@ takeControl(control)
   this.navCtrl.push(ControlPage, {control});
 }
 
+FormatControl(){
+                  var date = new Date();
+                  var fecha = date.getDate().toString() + date.getMonth().toString();
+                  if (localStorage.getItem ("1") == fecha){
+                  //  this.yaesta=true;
+                    //document.getElementById("control1").style.backgroundColor = 'red';
+                    //document.getElementById("1").setAttribute("disabled","true");
+                  }
+                  
+}
 
 }
