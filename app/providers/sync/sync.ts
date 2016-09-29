@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import { Config } from '../../config/config';
 import {Storage, SqlStorage} from 'ionic-angular';
@@ -15,6 +17,7 @@ export class SyncService {
   constructor(private http: Http, private config: Config) {}
 private posturl: string;
 private storage;
+public idchecklist;
 createAuthorizationHeader(headers:Headers) {
     headers.append('token', 'qwerty123456'); 
   }
@@ -43,41 +46,50 @@ getMisUsers()
         return misusers;
     }
 
-setResultados(resultados,table)
+setResultados(resultados,table):any
 {
-   console.log('resultados:' +resultados);
+   console.log('resultados ' + table + ": " +resultados);
     this.posturl = this.config.baseurl+'/actions/set'+table+'.php';
-    
+    console.log(this.posturl);
         let params = resultados;
         let headers = new Headers();
         //headers.append('Content-type', 'application/x-www-form-urlencoded');
         headers.append('Content-type', 'form-data');
         // devuelve un Observable
-        this.http.post(this.posturl, params, {headers: headers})
-            //.map(data => { data.json()})
-            .subscribe(res => {
-                        var respuesta = JSON.parse(res.json());
-                        console.log (respuesta.success);
-                        if (respuesta.success== "true"){
-                            console.log("insert correcto");
-                            ///BORRAR DATOS TABLA 
-                                // this.storage = new Storage(SqlStorage, {name:'tfc'});
-                                // this.storage.query("delete from " + table).then(
-                                // (data) => { console.log (JSON.stringify(data.res));}, 
-                                // (error) => { console.log("ERROR -> " + JSON.stringify(error.err));});  
-                                return "hola"
-                            }
-                        else {
-                            console.log ("ERROR EN EL INSERT");
-                            return "error"
-                            }
-
-                        },
-                        error => {
-                            console.log("error post: " + error);
-                            return "error"
-                        } );
+        alert("control1" + table);
+       return this.http.post(this.posturl, params, {headers: headers})
+            .map (res => JSON.parse(res.json()))
+            .do (data => {console.log(data);
+                        //alert("data" + data);
+                        alert("control2" + table);
+                        });
+            
+            //console.log()
+            //.subscribe(res => {
+            //              console.log("SUCCESS" + res.success);},
+            //              console.log (JSON.parse(res.json()).id);
+            //              let respuesta = JSON.parse(res.json()).success;
+            //              console.log ("respuesta= " + respuesta);
+            //              if (respuesta== "true"){
+            //                  console.log("insert correcto " + table);
+            // //                 ///BORRAR DATOS TABLA 
+            // //                     // this.storage = new Storage(SqlStorage, {name:'tfc'});
+            // //                     // this.storage.query("delete from " + table).then(
+            // //                     // (data) => { console.log (JSON.stringify(data.res));}, 
+            // //                     // (error) => { console.log("ERROR -> " + JSON.stringify(error.err));});  
+            // //                     return respuesta.id;
+            //                  }
+            //              else {
+            //                  console.log ("ERROR EN EL INSERT " + table);
+            //                  }
+            //              },
+            //              error => {
+            //                  console.log("error post: " + error);
+            //              },
+            //              () => {console.log("FIN")} );
+                    
  //   this.http.post(`${this.config.baseurl}/actions/getusers.php?idempresa=${this.config.idempresa}&_dc=1470480375978`,);
+
 }
 
 

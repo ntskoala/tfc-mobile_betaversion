@@ -6,6 +6,7 @@ import {SyncService} from '../../providers/sync/sync';
 import {LoginPage} from '../login/login';
 import {HomePage} from '../home/home';
 import {TranslatePipe} from 'ng2-translate';
+
 /*
   Generated class for the SyncPage page.
 
@@ -95,27 +96,45 @@ private storage;
 sync_data(){
   //alert("hay sinc");
                 this.storage.query("select idcontrol,resultado,fecha,foto from resultadoscontrol").then((data) => {
-                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontrol");
+                  if (data.res.rows.length > 0){
+                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontrol")
+                  .subscribe(data => {alert("control5")},
+                              error => alert("control6" + error),
+                              () => alert("fin"));
+                  }
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
               });
 
                 this.storage.query("select idchecklist,fecha,foto from resultadoschecklist").then((data) => {
-                  var idrespuesta = this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoschecklist");
-                  alert (idrespuesta);
+                  if (data.res.rows.length > 0){
+                  let idrespuesta = this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoschecklist")
+                  .subscribe(data => this.sync_checklistcontroles(data.id));
+                  console.log ("returned" + idrespuesta);
+                  }
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
               });
 
-                this.storage.query("select idcontrolchecklist,resultado,descripcion from resultadoscontroleschecklist").then((data) => {
-                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontroleschecklist");
-              }, (error) => {
+
+}
+sync_checklistcontroles(id){
+ // alert ("send");
+                this.storage.query("select idcontrolchecklist,  " +  id + " as idresultadochecklist ,resultado,descripcion from resultadoscontroleschecklist").then((data) => {
+                  if (data.res.rows.length > 0){
+                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontroleschecklist")
+                    .subscribe(data => {alert("control3")},
+                              error => alert("control4" + error),
+                              () => alert("fin"));
+                  }
+            }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
               });
 
 }
+
 
 }
