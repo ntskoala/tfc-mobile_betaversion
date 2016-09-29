@@ -90,7 +90,6 @@ takeFoto(){
     });
   }
 editar(control){
-  alert (control.idcontrol + " " + control.descripcion);
           let prompt = this.alertCtrl.create({
             title: 'Descripcion',
             inputs: [{name: 'descripcion'}],
