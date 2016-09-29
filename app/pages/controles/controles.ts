@@ -28,7 +28,7 @@ private storage: Storage;
     this.getControles();
   }
     getControles() {
-                  this.storage.query("SELECT * FROM controles").then((data) => {
+                  this.storage.query("SELECT * FROM controles WHERE idusuario = ?",[sessionStorage.getItem("idusuario")]).then((data) => {
                   this.controlesList = data.res.rows; 
                   console.log ("controles:" + this.controlesList);
                   //alert ('rows: ' + data.rows.item(0).id);

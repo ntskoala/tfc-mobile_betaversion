@@ -87,7 +87,7 @@ private storage;
                   console.log(JSON.stringify(data.res));
               //    alert("ok " + data.res);
               }, (error) => {
-                  console.log("ERROR -> " + JSON.stringify(error.err));
+                  console.log("ERROR INSERTANDO LOGIN-> " + JSON.stringify(error));
                   alert("error " + JSON.stringify(error.err));
               });
 }

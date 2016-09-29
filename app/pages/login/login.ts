@@ -50,8 +50,9 @@ login(){
 
 this.data.getLogin(this.nombre,this.password);
 setTimeout (() => {
-//  alert (this.data.logged);
+  //alert (this.data.logged);
   if (!isNaN(this.data.logged)){
+    sessionStorage.setItem("idusuario",this.data.logged.toString());
     this.accesomenu.enable(true);
     this.navCtrl.setRoot(HomePage);
     }

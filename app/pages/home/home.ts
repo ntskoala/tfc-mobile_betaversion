@@ -99,7 +99,7 @@ sincronizate(){
   // alert ('saving' + user.nombre + ' ' + user.usuario);
     //let newData = JSON.stringify(data);
     //this.storage.set('usuarios', newData);
-              this.storage.query("INSERT INTO controles (id, nombre, pla, minimo, maximo, objetivo, tolerancia, critico) VALUES (?,?,?,?,?,?,?,?)",[control.id,control.nombre,control.pla,control.minimo,control.maximo,control.objetivo,control.tolerancia,control.critico]).then((data) => {
+              this.storage.query("INSERT INTO controles (id,idusuario, nombre, pla, minimo, maximo, objetivo, tolerancia, critico) VALUES (?,?,?,?,?,?,?,?,?)",[control.id,control.idusuario,control.nombre,control.pla,control.valorminimo,control.valormaximo,control.objetivo,control.tolerancia,control.critico]).then((data) => {
                   console.log(JSON.stringify(data.res));
                   //alert("ok control" + data.res);
               }, (error) => {

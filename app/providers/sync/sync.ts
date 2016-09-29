@@ -25,7 +25,7 @@ getMisControles(userid)
             let headers = new Headers();
             this.createAuthorizationHeader(headers);
 //        let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`,{headers:headers});
-       let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?userid=${userid}&_dc=1470480375978`);
+       let miscontroles = this.http.get(`${this.config.baseurl}/views/getcontroles.php?idempresa=${this.config.idempresa}&_dc=1470480375978`);
         return miscontroles;
     }
 

@@ -18,6 +18,7 @@ export class Data {
       this.inicializa();
   }
  inicializa(){
+   //  this.storage.query('DROP TABLE IF EXISTS logins');
    this.storage.query('CREATE TABLE IF NOT EXISTS logins (id INTEGER PRIMARY KEY, user TEXT, password TEXT, tipouser TEXT, nombre TEXT)').then((data) => {
             console.log("TABLE CREATED  LOGINS-> " + JSON.stringify(data.res));
           //  alert ('creada logins');
@@ -25,7 +26,7 @@ export class Data {
             console.log("ERROR -> " + JSON.stringify(error.err));
   });
   this.storage.query('DROP TABLE IF EXISTS controles');
-     this.storage.query('CREATE TABLE IF NOT EXISTS controles (id INTEGER PRIMARY KEY, nombre TEXT, pla TEXT, minimo INTEGER, maximo INTEGER, objetivo INTEGER, tolerancia INTEGER, critico INTEGER)').then((data) => {
+     this.storage.query('CREATE TABLE IF NOT EXISTS controles (id INTEGER PRIMARY KEY,idusuario INTEGER, nombre TEXT, pla TEXT, minimo INTEGER, maximo INTEGER, objetivo INTEGER, tolerancia INTEGER, critico INTEGER)').then((data) => {
             console.log("TABLE CREATED CONTROLES-> " + JSON.stringify(data.res));
         }, (error) => {
             console.log("ERROR -> " + JSON.stringify(error.err));
