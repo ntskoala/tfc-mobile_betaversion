@@ -18,6 +18,7 @@
 
 <ion-content padding>
 <ion-item *ngFor="let control of checklistcontroles" (swipe)="editar(control)">
+
   <ion-label >{{control.nombrecontrol}}</ion-label>
   <ion-checkbox [(ngModel)]="control.checked"></ion-checkbox>
 </ion-item>

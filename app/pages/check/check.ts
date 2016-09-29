@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import {Storage, SqlStorage} from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import {TranslatePipe} from 'ng2-translate';
@@ -34,7 +34,7 @@ private storage: Storage;
 public idchecklist;
 public nombrechecklist: string;
 public base64Image;
-  constructor(private navCtrl: NavController, private params: NavParams) {
+  constructor(private navCtrl: NavController, private params: NavParams, private alertCtrl: AlertController) {
          this.storage = new Storage(SqlStorage, {name:'tfc'});
         this.idchecklist =  this.params.get('checklist').idchecklist;
         this.nombrechecklist = this.params.get('checklist').nombrechecklist;
@@ -91,5 +91,14 @@ takeFoto(){
   }
 editar(control){
   alert (control.idcontrol + " " + control.descripcion);
+          let prompt = this.alertCtrl.create({
+            title: 'Descripcion',
+            inputs: [{name: 'descripcion'}],
+            buttons: [
+                {text: 'Cancel'},
+                {text: 'Add',handler: data => {control.descripcion = data.descripcion;}
+                }]
+            });
+        prompt.present();
 }
 }

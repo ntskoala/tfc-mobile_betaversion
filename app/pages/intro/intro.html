@@ -12,20 +12,57 @@
   
 <ion-slides [options]="slideOptions">
 <ion-slide>
-    <ion-item>
-  <ion-label>Texto explicación 1</ion-label>
 
-  </ion-item>
-<img src="img/screen1.png" heihgt="70%"/>
+<img src="img/screen1.png" style="max-width=50% !important;" />
+   <ion-card>
+     <ion-card-title>
+       <strong>{{"intro.titulo1" | translate}}</strong>
+       </ion-card-title>
+      <ion-card-content>
+        <p>{{"intro.slide1" | translate}}</p>
+      </ion-card-content>
+    </ion-card>
+
 </ion-slide>
 
 <ion-slide>
 <img src="img/screen2.png" heihgt="70%" />
+   <ion-card>
+     <ion-card-title>
+       <strong>{{"intro.titulo2" | translate}}</strong>
+       </ion-card-title>
+      <ion-card-content>
+        <p>{{"intro.slide2" | translate}}</p>
+      </ion-card-content>
+    </ion-card>
+
 </ion-slide>
 
 <ion-slide>
-<img src="img/screen3.png" heihgt="70%" />
+<img src="img/screen4.png" heihgt="70%" />
+   <ion-card>
+     <ion-card-title>
+       <strong>{{"intro.titulo3" | translate}}</strong>
+       </ion-card-title>
+      <ion-card-content>
+        <p>{{"intro.slide3" | translate}}</p>
+      </ion-card-content>
+    </ion-card>
 </ion-slide>
+
+<ion-slide>
+<img src="img/screen4.png" heihgt="70%" />
+   <ion-card>
+     <ion-card-title>
+       <strong>{{"intro.titulo4" | translate}}</strong>
+       </ion-card-title>
+      <ion-card-content>
+        <p>{{"intro.slide4" | translate}}</p>
+      </ion-card-content>
+    </ion-card>
+
+</ion-slide>
+
 
 <ion-slide>
 <ion-row>
@@ -39,9 +76,17 @@
 </ion-row>
 <ion-row>
 <ion-col>
-<img src="img/screen6.jpg" />
+<img src="img/screen5.png" height="30%"/>
 </ion-col>
 </ion-row>
+   <ion-card>
+     <ion-card-title>
+       <strong>{{"intro.titulo5" | translate}}</strong>
+       </ion-card-title>
+      <ion-card-content>
+        <p>{{"intro.slide5" | translate}}</p>
+      </ion-card-content>
+    </ion-card>
 </ion-slide>
 
 </ion-slides>

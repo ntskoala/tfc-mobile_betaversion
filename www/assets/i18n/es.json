@@ -1,6 +1,6 @@
 {
     "home" : "Home",
-    "intro" : "Es la primera vez que usas la app, ve al menu y unete a una banda existente, o crea una nueva",
+    "intro2" : "Es la primera vez que usas la app, ve al menu y unete a una banda existente, o crea una nueva",
      "menu": {    
         "home": "Home",
         "controles": "Controles",
@@ -11,6 +11,18 @@
     "alertas": {
         "error": "Error",
          "errorvalor": "El valor tiene que se numérico y no puede estar vacío"
+    },
+    "intro":{
+        "titulo1":"Login",
+        "slide1": "Introduce tu nombre de usuario y password para acceder",
+        "titulo2":"Menú",
+        "slide2":"Selecciona si quieres rellenar un control o un checklist",
+        "titulo3": "Lista de controles",
+        "slide3": "listado de controles o checklist disponibles para ti",
+        "titulo4": "Checklist",
+        "slide4": "En los checklist puedes hacer swipe, deslizar el dedo a izquierda o derecha, para insertar un comentario",
+        "titulo5": "Comienza ya",
+        "slide5": "Pulsa el botón login para comenzar, marca la casilla de no mostrar más para que este tutorial no se muestre la próxima vez que entres en la aplicación"
     },
     "asistencia": "Asistencia",
     "control": "control",
