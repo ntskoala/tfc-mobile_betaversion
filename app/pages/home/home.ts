@@ -111,7 +111,7 @@ sincronizate(){
   saveChecklist(checklist){
     //let newData = JSON.stringify(data);
     //this.storage.set('usuarios', newData);
-              this.storage.query("INSERT INTO checklist (idchecklist, nombrechecklist, idcontrol, nombrecontrol) VALUES (?,?,?,?)",[checklist.idchecklist,checklist.nombrechecklist,checklist.id,checklist.nombre]).then((data) => {
+              this.storage.query("INSERT INTO checklist (idchecklist,idusuario, nombrechecklist, idcontrol, nombrecontrol) VALUES (?,?,?,?,?)",[checklist.idchecklist,checklist.idusuario,checklist.nombrechecklist,checklist.id,checklist.nombre]).then((data) => {
                   console.log(JSON.stringify(data));
                   //alert("ok checklist" + data.res);
               }, (error) => {

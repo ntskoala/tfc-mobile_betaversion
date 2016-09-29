@@ -73,7 +73,7 @@ terminar(){
   (Resultado) => { console.log(Resultado);},
   (error) => {console.log(JSON.stringify(error))});
 }
-
+this.navCtrl.pop();
 }
 takeFoto(){
   this.base64Image = "data:image/jpeg;base64,";

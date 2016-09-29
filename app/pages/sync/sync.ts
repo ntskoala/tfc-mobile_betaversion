@@ -102,7 +102,8 @@ sync_data(){
               });
 
                 this.storage.query("select idchecklist,fecha,foto from resultadoschecklist").then((data) => {
-                  this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoschecklist");
+                  var idrespuesta = this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoschecklist");
+                  alert (idrespuesta);
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
                   alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));

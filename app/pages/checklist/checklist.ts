@@ -24,7 +24,7 @@ private storage: Storage;
   }
 
 getChecklists(){
-                  this.storage.query("Select * FROM checklist GROUP BY idchecklist").then((data) => {
+                  this.storage.query("Select * FROM checklist WHERE idusuario = ? GROUP BY idchecklist", [sessionStorage.getItem("idusuario")]).then((data) => {
                   this.checklistList = data.res.rows;
                   console.log ("checklist:" + this.checklistList);
               }, (error) => {
