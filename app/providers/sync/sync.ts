@@ -61,6 +61,17 @@ setResultados(resultados,table):any
             .do (data => {console.log(data);
                         //alert("data" + data);
                         console.log("control2" + table);
+                         if (data.success== "true"){
+                             console.log("insert correcto " + table);
+                            ///BORRAR DATOS TABLA 
+                                this.storage = new Storage(SqlStorage, {name:'tfc'});
+                                this.storage.query("delete from " + table).then(
+                                (data) => { console.log (JSON.stringify(data.res));}, 
+                                (error) => { console.log("ERROR -> " + JSON.stringify(error.err));});
+                             }
+                         else {
+                             console.log ("ERROR EN EL INSERT " + table);
+                             }
                         });
             
             //console.log()
