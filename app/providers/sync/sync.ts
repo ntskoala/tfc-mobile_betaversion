@@ -56,12 +56,11 @@ setResultados(resultados,table):any
         //headers.append('Content-type', 'application/x-www-form-urlencoded');
         headers.append('Content-type', 'form-data');
         // devuelve un Observable
-        alert("control1" + table);
        return this.http.post(this.posturl, params, {headers: headers})
             .map (res => JSON.parse(res.json()))
             .do (data => {console.log(data);
                         //alert("data" + data);
-                        alert("control2" + table);
+                        console.log("control2" + table);
                         });
             
             //console.log()

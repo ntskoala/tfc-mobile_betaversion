@@ -98,24 +98,32 @@ sync_data(){
                 this.storage.query("select idcontrol,resultado,fecha,foto from resultadoscontrol").then((data) => {
                   if (data.res.rows.length > 0){
                   this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontrol")
-                  .subscribe(data => {alert("control5")},
-                              error => alert("control6" + error),
-                              () => alert("fin"));
+                  .subscribe(data => {console.log("control5")},
+                              error => console.log("control6" + error),
+                              () => console.log("ok"));
                   }
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
-                  alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
+                  alert("error, no se han podido sincronizar todos los datos [resultadoscontroles] " + JSON.stringify(error.err));
               });
 
-                this.storage.query("select idchecklist,fecha,foto from resultadoschecklist").then((data) => {
+                this.storage.query("select idlocal,idchecklist,fecha,foto from resultadoschecklist").then((data) => {
                   if (data.res.rows.length > 0){
-                  let idrespuesta = this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoschecklist")
-                  .subscribe(data => this.sync_checklistcontroles(data.id));
-                  console.log ("returned" + idrespuesta);
-                  }
+                   
+                    for (let fila = 0; fila < data.res.rows.length;fila++)
+                        {
+                          console.log (data.res.rows[fila]);
+                          let arrayfila =[data.res.rows[fila]];
+                          arrayfila.push()
+                        let idrespuesta = this.sync.setResultados(JSON.stringify(arrayfila),"resultadoschecklist")
+                        .subscribe(data => this.sync_checklistcontroles(data.id));
+                        console.log ("returned" + idrespuesta);
+                        }
+                  
+                }
               }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
-                  alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
+                  alert("error, no se han podido sincronizar todos los datos [resultadoschecklist]" + JSON.stringify(error.err));
               });
 
 
@@ -125,13 +133,13 @@ sync_checklistcontroles(id){
                 this.storage.query("select idcontrolchecklist,  " +  id + " as idresultadochecklist ,resultado,descripcion from resultadoscontroleschecklist").then((data) => {
                   if (data.res.rows.length > 0){
                   this.sync.setResultados(JSON.stringify(data.res.rows),"resultadoscontroleschecklist")
-                    .subscribe(data => {alert("control3")},
-                              error => alert("control4" + error),
-                              () => alert("fin"));
+                    .subscribe(data => {console.log("control3")},
+                              error => console.log("control4" + error),
+                              () => console.log("fin"));
                   }
             }, (error) => {
                   console.log("ERROR -> " + JSON.stringify(error.err));
-                  alert("error, no se han podido sincronizar todos los datos " + JSON.stringify(error.err));
+                  alert("error, no se han podido sincronizar todos los datos [resultadoscontrolchecklist]" + JSON.stringify(error.err));
               });
 
 }

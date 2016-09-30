@@ -65,14 +65,20 @@ getChecklists(idchecklist){
 terminar(){
   console.log(this.checklistcontroles);
       this.storage.query('INSERT INTO resultadoschecklist (idchecklist, foto) VALUES (?,?)',[this.idchecklist,this.base64Image]).then(
-  (Resultado) => { console.log(Resultado);},
+  (Resultado) => { 
+           console.log(Resultado);
+          let idresultadochecklist = Resultado.res.insertId;
+    
+          for(var index in this.checklistcontroles) { 
+            var attr = this.checklistcontroles[index];
+            this.storage.query('INSERT INTO resultadoscontroleschecklist (idcontrolchecklist,idchecklist, resultado, descripcion, idresultadochecklist) VALUES (?,?,?,?,?)',[attr.idcontrol,this.idchecklist,attr.checked,attr.descripcion,idresultadochecklist]).then(
+          (Resultado) => { console.log(Resultado);},
+          (error) => {console.log(JSON.stringify(error))});
+        }
+  
+},
   (error) => {console.log(JSON.stringify(error))});
-  for(var index in this.checklistcontroles) { 
-    var attr = this.checklistcontroles[index];
-    this.storage.query('INSERT INTO resultadoscontroleschecklist (idcontrolchecklist, resultado, descripcion) VALUES (?,?,?)',[attr.idcontrol,attr.checked,attr.descripcion]).then(
-  (Resultado) => { console.log(Resultado);},
-  (error) => {console.log(JSON.stringify(error))});
-}
+
 this.navCtrl.pop();
 }
 takeFoto(){
